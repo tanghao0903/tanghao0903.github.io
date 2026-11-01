@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects · Naza Tang</title>
+<meta name="description" content="Naza Tang 的项目列表">
+<meta name="theme-color" content="#07060b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Noto+Sans+SC:wght@500;900&display=swap">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/cyber.css">
+<style>
+.page{position:relative;z-index:4;min-height:100vh;min-height:100svh;padding:72px 20px 64px;display:flex;flex-direction:column}
+.wrap{width:100%}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:48px}
+.back{font-size:12px;letter-spacing:.25em;color:var(--cyan);text-decoration:none;border:1px solid rgba(0,240,255,.45);padding:8px 14px;background:rgba(7,6,11,.55);backdrop-filter:blur(6px);
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:color .2s,border-color .2s,background .2s}
+.back:hover{color:#000;background:var(--cyan)}
+.brand{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.3em;color:#fff;text-shadow:0 0 10px rgba(0,240,255,.7)}
+.head{padding:28px 28px 30px;background:linear-gradient(90deg,rgba(7,6,11,.82),rgba(7,6,11,.45));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-left:3px solid var(--pink);box-shadow:-6px 0 22px -8px var(--pink);margin-bottom:28px;opacity:0;transform:translateY(12px);transition:all .8s .2s cubic-bezier(.2,.7,.2,1)}
+.ready .head{opacity:1;transform:none}
+.head small{display:block;font-size:12px;letter-spacing:.3em;color:var(--pink);margin-bottom:10px}
+.title{position:relative;display:inline-block;margin:0;font-family:var(--disp);font-weight:900;font-size:clamp(40px,8vw,88px);line-height:1;letter-spacing:.05em;color:#f4fdff;
+  text-shadow:0 0 4px #fff,0 0 14px var(--cyan),0 0 40px rgba(0,240,255,.6)}
+.title::before,.title::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden;text-shadow:none;mix-blend-mode:screen;opacity:.85}
+.title::before{color:var(--pink);animation:g1 3.4s infinite steps(1)}
+.title::after{color:var(--cyan);animation:g2 2.9s infinite steps(1)}
+@keyframes g1{0%,14%,100%{clip-path:inset(0 0 100% 0)}4%{clip-path:inset(15% 0 65% 0);transform:translate(-7px,0)}9%{clip-path:inset(62% 0 20% 0);transform:translate(6px,0)}}
+@keyframes g2{0%,40%,100%{clip-path:inset(0 0 100% 0)}33%{clip-path:inset(70% 0 8% 0);transform:translate(8px,0)}37%{clip-path:inset(25% 0 58% 0);transform:translate(-5px,0)}}
+.title-cn{display:inline-block;margin-left:18px;font-family:var(--cn);font-weight:900;font-size:clamp(26px,4.5vw,44px);color:var(--yellow);letter-spacing:.2em;text-shadow:0 0 12px rgba(245,255,59,.6);vertical-align:.15em}
+.term{margin-top:16px;font-size:14px;color:rgba(233,246,255,.82);letter-spacing:.06em}
+.term b{color:var(--cyan);font-weight:400}
+.grid{gap:20px}
+.card{background:linear-gradient(135deg,rgba(7,6,11,.78),rgba(20,8,36,.66));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(16px)}
+.ready .card{opacity:1;transform:none;transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1),background .2s}
+.ready .card:nth-child(1){transition-delay:.45s}.ready .card:nth-child(2){transition-delay:.6s}.ready .card:nth-child(3){transition-delay:.75s}
+.card:hover{transform:translateY(-4px);background:linear-gradient(135deg,rgba(0,40,52,.82),rgba(48,10,60,.72))}
+.card.soon{opacity:0}.ready .card.soon{opacity:.7}
+footer{margin-top:auto;padding-top:20px;border-top:1px dashed rgba(0,240,255,.3)}
+.spacer{flex:1;min-height:60px}
+@media (prefers-reduced-motion:reduce){.title::before,.title::after{animation:none}}
+@media (max-width:600px){.title-cn{display:block;margin:12px 0 0}.head{padding:22px 18px}}
+</style>
+</head>
+<body>
+<canvas id="metal" aria-hidden="true"></canvas>
+<div class="fx sweep"></div><div class="fx scan"></div><div class="fx vig"></div>
+<div class="hud" aria-hidden="true">
+  <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+  <span class="t t1"><span class="dot"></span>SYS://NAZAJTANG.WORK/PROJECTS</span>
+  <span class="t t2" id="clock">T --:--:--</span>
+  <span class="t t3" id="coord">X 0000 · Y 0000</span>
+  <span class="t t4">NEURAL LINK · ONLINE</span>
+</div>
+
+<main class="page">
+  <div class="wrap" style="max-width:960px;margin:0 auto">
+    <nav class="top">
+      <a class="back" href="/">◂ HOME</a>
+      <span class="brand">NAZA TANG</span>
+    </nav>
+
+    <header class="head">
+      <small>// 01 — DIRECTORY</small>
+      <h1 class="title" data-text="PROJECTS">PROJECTS</h1><span class="title-cn">项目</span>
+      <div class="term">&gt; ls ~/projects &nbsp;<b>2 items</b><span class="cursor"></span></div>
+    </header>
+
+    <div class="grid">
+      <a class="card" href="/league-view/">
+        <div class="id">[ 001 ] · LIVE</div>
+        <b>学术军备竞赛（冷战版）</b>
+        <span>学习积分榜、学科比分和战报看板。</span>
+        <div class="bar"><u class="on"></u><u class="on"></u><u class="on"></u><u class="on"></u><u></u></div>
+        <i>&gt; OPEN_</i>
+      </a>
+      <div class="card soon">
+        <div class="id">[ 002 ] · LOADING</div>
+        <b>更多项目</b>
+        <span>正在编译中……</span>
+        <div class="bar"><u class="on"></u><u></u><u></u><u></u><u></u></div>
+        <i>&gt; STANDBY_</i>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="wrap" style="max-width:960px;margin:0 auto">
+    <footer>
+      <span>© 2026 NAZA TANG · ALL SYSTEMS NOMINAL</span>
+      <a href="https://github.com/tanghao0903">GITHUB ▸</a>
+    </footer>
+  </div>
+</main>
+
+<script src="/assets/metal.js"></script>
+</body>
+</html>
