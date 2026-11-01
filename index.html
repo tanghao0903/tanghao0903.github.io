@@ -6,6 +6,9 @@
 <title>Naza Tang</title>
 <meta name="description" content="欢迎访问 Naza Tang 的个人网站">
 <meta name="theme-color" content="#0b0b0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,500;1,6..96,700&family=Noto+Serif+SC:wght@300;500&display=swap">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 :root{--fg:#f2f2f4;--muted:#9a9aa3;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
@@ -17,12 +20,13 @@ html,body{margin:0;background:#0b0b0d;color:var(--fg);font-family:-apple-system,
 .hero{position:relative;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;padding:0 16px;pointer-events:none}
 .hello{opacity:0;transform:translateY(24px) scale(.96);filter:blur(10px);transition:all 1.4s cubic-bezier(.2,.7,.2,1)}
 .hello.show{opacity:1;transform:none;filter:none}
-.hello small{display:block;font-size:clamp(13px,1.6vw,16px);letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:18px}
-.hello h1{margin:0;font-size:clamp(36px,8vw,96px);line-height:1.05;font-weight:800;letter-spacing:-.02em;
-  background:linear-gradient(180deg,#fff 0%,#eef0f4 45%,#a9adb6 58%,#f4f5f8 75%,#c3c6cd 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 6px 24px rgba(0,0,0,.55))}
-.hello p{margin:18px 0 0;font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,.8);text-shadow:0 2px 12px rgba(0,0,0,.6)}
-.scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.2em;opacity:0;transition:opacity 1s 1.8s;pointer-events:auto;text-decoration:none}
+.hello small{display:block;font-family:"Noto Serif SC",serif;font-weight:300;font-size:clamp(15px,2vw,20px);letter-spacing:.8em;margin-right:-.8em;color:rgba(255,255,255,.82);margin-bottom:10px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.hello h1{margin:0;font-family:"Bodoni Moda","Didot","Times New Roman",serif;font-style:italic;font-weight:700;font-size:clamp(64px,13vw,168px);line-height:1;letter-spacing:-.01em;padding:0 .08em .06em;
+  background:linear-gradient(180deg,#ffffff 0%,#f1f2f5 38%,#8d929b 52%,#f6f7f9 64%,#bfc3ca 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 8px 28px rgba(0,0,0,.6))}
+.hello .sub{margin:16px 0 0;font-family:"Noto Serif SC",serif;font-weight:500;font-size:clamp(16px,2.2vw,22px);letter-spacing:.5em;margin-right:-.5em;color:rgba(255,255,255,.88);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.hello .line{width:56px;height:1px;margin:22px auto 0;background:linear-gradient(90deg,transparent,#fff,transparent)}
+.scroll{position:absolute;font-family:"Noto Serif SC",serif;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.2em;opacity:0;transition:opacity 1s 1.8s;pointer-events:auto;text-decoration:none}
 .hello.show ~ .scroll{opacity:1}
 .scroll::after{content:"";display:block;width:1px;height:36px;margin:10px auto 0;background:linear-gradient(#fff,transparent);animation:drip 1.8s infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -45,9 +49,10 @@ footer a{color:#c9ccd3}
 <canvas id="metal" aria-hidden="true"></canvas>
 <section class="hero">
   <div class="hello" id="hello">
-    <small>Welcome</small>
-    <h1>欢迎访问<br>Naza Tang 的网站</h1>
-    <p>移动鼠标，搅动一下液态金属</p>
+    <small>欢迎访问</small>
+    <h1>Naza Tang</h1>
+    <div class="sub">的个人网站</div>
+    <div class="line"></div>
   </div>
   <a class="scroll" href="#projects">向下看看</a>
 </section>
