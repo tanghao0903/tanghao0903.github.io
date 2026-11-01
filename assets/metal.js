@@ -51,7 +51,7 @@
   /* wave equation step; the small blend toward the neighbour average acts as viscosity */
   ' float avg=(l+r+u+d)*.25;',
   ' float h=(l+r+u+d)*.5-c.g;',
-  ' h=mix(h,avg,.12)*.988;',
+  ' h=mix(h,avg,.05)*.994;',
   /* pointer: press a trough along the segment the cursor travelled this frame */
   ' vec2 p=uv;p.x*=asp;vec2 a=A;a.x*=asp;vec2 b=B;b.x*=asp;',
   ' vec2 ab=b-a;float t=clamp(dot(p-a,ab)/max(dot(ab,ab),1e-6),0.,1.);',
@@ -107,7 +107,7 @@
   ' if(useSim>.5){',
   '  float s0=sim(sp),sx=sim(sp+vec2(spx.x,0.)),sy=sim(sp+vec2(0.,spx.y));',
   '  float sxm=sim(sp-vec2(spx.x,0.)),sym=sim(sp-vec2(0.,spx.y));',
-  '  g+=vec2(sx-sxm,sy-sym)*vec2(R.x/m,R.y/m)/(2.*spx)*.03;',
+  '  g+=vec2(sx-sxm,sy-sym)*vec2(R.x/m,R.y/m)/(2.*spx)*.04;',
   ' }',
   ' vec3 N=normalize(vec3(-g*.5,1.));',
   /* camera looks down at the sheet with a slight perspective so flat areas still mirror the room */
@@ -193,7 +193,7 @@
     gl.bindFramebuffer(gl.FRAMEBUFFER,fbs[1-cur]);gl.viewport(0,0,SW,SH);
     gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex[cur]);
     gl.uniform1i(sS,0);gl.uniform2f(sPx,1/SW,1/SH);gl.uniform2f(sA,ax,ay);gl.uniform2f(sB,bx,by);
-    gl.uniform1f(sF,f);gl.uniform1f(sRad,.028);gl.uniform1f(sAsp,SW/SH);
+    gl.uniform1f(sF,f);gl.uniform1f(sRad,.055);gl.uniform1f(sAsp,SW/SH);
     gl.drawArrays(gl.TRIANGLES,0,3);
     cur=1-cur;
   }
@@ -203,7 +203,7 @@
       var ax=lx,ay=ly,bx=px,by=py,f=0;
       if(has){
         var dx=(bx-ax)*innerWidth,dy=(by-ay)*innerHeight,sp=Math.sqrt(dx*dx+dy*dy);
-        f=Math.min(.12,sp*.006)+force;force*=.6;
+        f=Math.min(.3,sp*.014)+force;force*=.6;
         idle=sp>0.5?0:idle+dt;
       } else idle+=dt;
       if(!has||idle>2.5){ /* idle drop: a slow orbiting stir */
@@ -211,6 +211,7 @@
         bx=.5+Math.cos(k)*.3;by=.5+Math.sin(k*1.3)*.22;ax=.5+Math.cos(k-.05)*.3;ay=.5+Math.sin((k-.05)*1.3)*.22;f=.025;
       }
       step(ax,ay,bx,by,f);
+      step(bx,by,bx,by,0);
       step(bx,by,bx,by,0);
       lx=px;ly=py;
     }
