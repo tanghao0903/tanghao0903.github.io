@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naza Tang</title>
+<meta name="description" content="欢迎访问 Naza Tang 的个人网站">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{--fg:#f2f2f4;--muted:#9a9aa3;--line:rgba(255,255,255,.12);--card:rgba(255,255,255,.04)}
+*{box-sizing:border-box}
+html,body{margin:0;background:#0b0b0d;color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+#metal{position:fixed;inset:0;width:100%;height:100%;display:block}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 45% at 50% 50%,rgba(5,5,8,.72),rgba(5,5,8,.25) 70%,transparent)}
+.hello{position:relative}
+.hero{position:relative;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;padding:0 16px;pointer-events:none}
+.hello{opacity:0;transform:translateY(24px) scale(.96);filter:blur(10px);transition:all 1.4s cubic-bezier(.2,.7,.2,1)}
+.hello.show{opacity:1;transform:none;filter:none}
+.hello small{display:block;font-size:clamp(13px,1.6vw,16px);letter-spacing:.5em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:18px}
+.hello h1{margin:0;font-size:clamp(36px,8vw,96px);line-height:1.05;font-weight:800;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#fff 0%,#eef0f4 45%,#a9adb6 58%,#f4f5f8 75%,#c3c6cd 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 24px rgba(0,0,0,.55))}
+.hello p{margin:18px 0 0;font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,.8);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.2em;opacity:0;transition:opacity 1s 1.8s;pointer-events:auto;text-decoration:none}
+.hello.show ~ .scroll{opacity:1}
+.scroll::after{content:"";display:block;width:1px;height:36px;margin:10px auto 0;background:linear-gradient(#fff,transparent);animation:drip 1.8s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.panel{position:relative;background:linear-gradient(180deg,rgba(11,11,13,0) 0,#0b0b0d 120px);padding:120px 16px 64px}
+.wrap{max-width:860px;margin:0 auto}
+h2{font-size:13px;letter-spacing:.3em;color:var(--muted);font-weight:600;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{display:block;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:inherit;text-decoration:none;backdrop-filter:blur(8px);transition:transform .2s,border-color .2s,background .2s}
+.card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.07)}
+.card b{display:block;font-size:18px;margin-bottom:6px}
+.card span{color:var(--muted);font-size:14px;line-height:1.6}
+.card i{display:block;margin-top:14px;font-style:normal;font-size:13px;color:#c9ccd3}
+.soon{border-style:dashed;opacity:.6}
+footer{margin-top:64px;color:var(--muted);font-size:13px;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+footer a{color:#c9ccd3}
+@media (prefers-reduced-motion:reduce){.hello{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="metal" aria-hidden="true"></canvas>
+<section class="hero">
+  <div class="hello" id="hello">
+    <small>Welcome</small>
+    <h1>欢迎访问<br>Naza Tang 的网站</h1>
+    <p>移动鼠标，搅动一下液态金属</p>
+  </div>
+  <a class="scroll" href="#projects">向下看看</a>
+</section>
+<section class="panel" id="projects">
+  <div class="wrap">
+    <h2>PROJECTS · 项目</h2>
+    <div class="grid">
+      <a class="card" href="/league-view/">
+        <b>学术军备竞赛（冷战版）</b>
+        <span>学习积分榜、学科比分和战报看板。</span>
+        <i>进入 →</i>
+      </a>
+      <div class="card soon">
+        <b>更多项目</b>
+        <span>正在路上……</span>
+      </div>
+    </div>
+    <footer>
+      <span>© 2026 Naza Tang</span>
+      <a href="https://github.com/tanghao0903">GitHub</a>
+    </footer>
+  </div>
+</section>
+<script>
+(function(){
+  var hello=document.getElementById('hello');
+  setTimeout(function(){hello.classList.add('show')},400);
+  var c=document.getElementById('metal');
+  var gl=c.getContext('webgl')||c.getContext('experimental-webgl');
+  if(!gl){c.style.background='radial-gradient(circle at 30% 30%,#e6e8ec,#5b5f68 40%,#16171a 75%)';return;}
+  var vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  var fs=[
+  'precision highp float;',
+  'uniform vec2 R;uniform float T;uniform vec2 M;uniform float MS;',
+  'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
+  ' return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}',
+  'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}',
+  'float H(vec2 p){',
+  ' float t=T*.08;',
+  ' vec2 q=vec2(fbm(p+t),fbm(p+vec2(5.2,1.3)-t));',
+  ' vec2 r=vec2(fbm(p+1.8*q+vec2(1.7,9.2)+t*1.3),fbm(p+1.8*q+vec2(8.3,2.8)-t));',
+  ' float v=fbm(p+1.6*r);',
+  ' float d=length(p-M);',
+  ' v+=MS*.35*sin(d*14.-T*5.)*exp(-d*2.2);',
+  ' v+=.25*exp(-d*d*6.)*MS;',
+  ' return v;}',
+  'vec3 env(vec3 r){',
+  ' float y=r.y;',
+  ' vec3 c=mix(vec3(.05,.05,.07),vec3(.85,.87,.92),smoothstep(-.2,.35,y));',
+  ' c+=vec3(1.)*smoothstep(.55,.62,y)*(1.-smoothstep(.7,.95,y))*.9;',
+  ' c=mix(c,vec3(.02),smoothstep(.0,-.4,y));',
+  ' c+=vec3(.25,.18,.35)*smoothstep(.2,.9,r.x)*.6;',
+  ' c+=vec3(.15,.25,.35)*smoothstep(.2,.9,-r.x)*.5;',
+  ' return c;}',
+  'void main(){',
+  ' vec2 uv=(gl_FragCoord.xy-.5*R)/min(R.x,R.y)*1.1;',
+  ' float e=.01;',
+  ' float a=H(uv),bx=H(uv+vec2(e,0)),by=H(uv+vec2(0,e));',
+  ' vec3 N=normalize(vec3((a-bx)/e,(a-by)/e,1.)*vec3(.12,.12,1.));',
+  ' vec3 V=vec3(0,0,1);',
+  ' vec3 Rf=reflect(-V,N);',
+  ' vec3 col=env(Rf.xzy*vec3(1,1,1)+vec3(0,N.y*.3,0));',
+  ' float fr=pow(1.-max(N.z,0.),3.);',
+  ' col=mix(col,vec3(.95),fr*.5);',
+  ' vec3 L=normalize(vec3(-.4,.6,.7));',
+  ' col+=pow(max(dot(reflect(-L,N),V),0.),60.)*1.2;',
+  ' col*=.55+.35*a;',
+  ' vec2 vg=gl_FragCoord.xy/R-.5;col*=1.-dot(vg,vg)*1.1;',
+  ' gl_FragColor=vec4(pow(col,vec3(.95)),1.);',
+  '}'].join('\n');
+  function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(o));return o;}
+  var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+  var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  var uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uM=gl.getUniformLocation(pr,'M'),uS=gl.getUniformLocation(pr,'MS');
+  var scale=Math.min(window.devicePixelRatio||1,1.5)*.75;
+  function resize(){c.width=Math.floor(innerWidth*scale);c.height=Math.floor(innerHeight*scale);gl.viewport(0,0,c.width,c.height);}
+  addEventListener('resize',resize);resize();
+  var mx=0,my=0,tx=0,ty=0,ms=0,tms=0;
+  function mv(x,y){var m=Math.min(innerWidth,innerHeight);tx=(x-innerWidth/2)/m*1.1;ty=-(y-innerHeight/2)/m*1.1;tms=1;}
+  addEventListener('pointermove',function(e){mv(e.clientX,e.clientY)});
+  addEventListener('touchmove',function(e){var t=e.touches[0];if(t)mv(t.clientX,t.clientY)},{passive:true});
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0=performance.now();
+  function frame(now){
+    var t=(now-t0)/1000;
+    mx+=(tx-mx)*.08;my+=(ty-my)*.08;ms+=(tms-ms)*.05;tms*=.985;
+    gl.uniform2f(uR,c.width,c.height);gl.uniform1f(uT,reduce?10:t);gl.uniform2f(uM,mx,my);gl.uniform1f(uS,ms);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
