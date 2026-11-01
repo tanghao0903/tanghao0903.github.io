@@ -35,7 +35,7 @@
 .grid{gap:20px}
 .card{background:linear-gradient(135deg,rgba(7,6,11,.78),rgba(20,8,36,.66));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transform:translateY(16px)}
 .ready .card{opacity:1;transform:none;transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1),background .2s}
-.ready .card:nth-child(1){transition-delay:.45s}.ready .card:nth-child(2){transition-delay:.6s}.ready .card:nth-child(3){transition-delay:.75s}
+.ready .card:nth-child(1){transition-delay:.45s}.ready .card:nth-child(2){transition-delay:.6s}.ready .card:nth-child(3){transition-delay:.75s}.ready .card:nth-child(4){transition-delay:.9s}
 .card:hover{transform:translateY(-4px);background:linear-gradient(135deg,rgba(0,40,52,.82),rgba(48,10,60,.72))}
 .card.soon{opacity:0}.ready .card.soon{opacity:.7}
 footer{margin-top:auto;padding-top:20px;border-top:1px dashed rgba(0,240,255,.3)}
@@ -65,7 +65,7 @@ footer{margin-top:auto;padding-top:20px;border-top:1px dashed rgba(0,240,255,.3)
     <header class="head">
       <small>// 01 — DIRECTORY</small>
       <h1 class="title" data-text="PROJECTS">PROJECTS</h1><span class="title-cn">项目</span>
-      <div class="term">&gt; ls ~/projects &nbsp;<b>2 items</b><span class="cursor"></span></div>
+      <div class="term">&gt; ls ~/projects &nbsp;<b>3 items</b><span class="cursor"></span></div>
     </header>
 
     <div class="grid">
@@ -76,8 +76,15 @@ footer{margin-top:auto;padding-top:20px;border-top:1px dashed rgba(0,240,255,.3)
         <div class="bar"><u class="on"></u><u class="on"></u><u class="on"></u><u class="on"></u><u></u></div>
         <i>&gt; OPEN_</i>
       </a>
+      <a class="card" href="/organic-sim/">
+        <div class="id">[ 002 ] · LIVE</div>
+        <b>有机合成机理模拟器</b>
+        <span>反应机理分步动画、物质库、分子拼搭和合成路线推荐。</span>
+        <div class="bar"><u class="on"></u><u class="on"></u><u class="on"></u><u class="on"></u><u></u></div>
+        <i>&gt; OPEN_</i>
+      </a>
       <div class="card soon">
-        <div class="id">[ 002 ] · LOADING</div>
+        <div class="id">[ 003 ] · LOADING</div>
         <b>更多项目</b>
         <span>正在编译中……</span>
         <div class="bar"><u class="on"></u><u></u><u></u><u></u><u></u></div>
