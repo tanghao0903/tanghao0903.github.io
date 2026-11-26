@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>清宫诡事录 · 龙袍前夜</title>
+<meta name="description" content="《清宫诡事录 · 龙袍前夜》灰盒 Demo：顺治八年二月十四，子夜。你是慈宁宫的守夜人老七。天亮之前，守夜簿上三更那一行，由你来写。Windows 免安装下载。">
+<meta name="theme-color" content="#0a0b0f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="清宫诡事录 · 龙袍前夜（灰盒 Demo）">
+<meta property="og:description" content="顺治八年二月十四，子夜。你是慈宁宫的守夜人老七。天亮之前，守夜簿上三更那一行，由你来写。">
+<meta property="og:image" content="https://nazajtang.work/qinggong/og.jpg">
+<meta property="og:url" content="https://nazajtang.work/qinggong/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="/qinggong/keyart.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#0a0b0f;--ink2:#111319;--ink3:#171a21;
+  --paper:#ece2c8;--paper2:#cfc5ad;--dim:#8f8875;
+  --gold:#c9a45c;--gold2:#e2c17f;--cinnabar:#8e2a22;--wall:#5e1f1c;--lantern:#ffb35c;
+  --line:rgba(201,164,92,.22);
+  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased}
+::selection{background:var(--cinnabar);color:var(--paper)}
+a{color:var(--gold2)}
+img,video{max-width:100%;display:block}
+
+/* ---------- top bar ---------- */
+.top{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px clamp(16px,4vw,48px)}
+.top a{color:var(--paper2);text-decoration:none;font-size:13px;letter-spacing:.18em;transition:color .2s}
+.top a:hover,.top a:focus-visible{color:var(--gold2)}
+.top .home{font-size:12px;letter-spacing:.24em}
+.top nav{display:flex;gap:clamp(14px,2.4vw,30px)}
+.top nav .navdl{color:var(--gold2)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;background:var(--ink)}
+.stage{position:absolute;top:0;bottom:0;right:0;left:30%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%);mask-image:linear-gradient(90deg,transparent 0,#000 26%)}
+.bg{position:absolute;inset:0;background:#05070d url(/qinggong/keyart.jpg) 22% 50%/cover no-repeat;transform:scale(1.04);transition:transform 6s cubic-bezier(.2,.7,.2,1)}
+.on .bg{transform:none}
+#snow{position:absolute;inset:0;width:100%;height:100%}
+.dark{position:absolute;inset:0;background:rgba(3,4,9,.74);
+  -webkit-mask-image:radial-gradient(circle var(--lr,240px) at var(--lx,30%) var(--ly,65%),transparent 0,rgba(0,0,0,.25) 40%,#000 100%);
+          mask-image:radial-gradient(circle var(--lr,240px) at var(--lx,30%) var(--ly,65%),transparent 0,rgba(0,0,0,.25) 40%,#000 100%)}
+.glow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(circle calc(var(--lr,240px)*.75) at var(--lx,30%) var(--ly,65%),rgba(255,170,80,.16),transparent 70%)}
+.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(10,11,15,.55),transparent 22%,transparent 72%,var(--ink))}
+
+.htxt{position:absolute;z-index:5;left:clamp(16px,7vw,112px);top:50%;transform:translateY(-46%);max-width:680px}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:.42em;color:var(--gold)}
+h1{margin:18px 0 0;white-space:nowrap;font-family:var(--serif);font-weight:900;font-size:clamp(54px,8.4vw,116px);line-height:1.05;letter-spacing:.06em;color:var(--paper);
+  text-shadow:0 0 28px rgba(236,226,200,.12),0 2px 0 rgba(0,0,0,.5)}
+.subt{margin-top:14px;font-family:var(--serif);font-size:clamp(16px,1.7vw,21px);letter-spacing:.32em;color:var(--paper2)}
+.hook{margin:28px 0 0;font-family:var(--serif);font-size:clamp(15px,1.3vw,17px);line-height:2.05;color:#d9d0b9;letter-spacing:.06em}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;font:500 15px/1 var(--sans);letter-spacing:.18em;text-decoration:none;color:var(--paper);border:1px solid rgba(236,226,200,.38);background:rgba(10,11,15,.35);transition:background .25s,border-color .25s,box-shadow .25s,color .25s;cursor:pointer}
+.btn:hover,.btn:focus-visible{border-color:var(--gold2);color:#fff;outline:none}
+.btn.primary{background:var(--cinnabar);border-color:rgba(226,193,127,.55);box-shadow:inset 3px 0 0 var(--gold)}
+.btn.primary:hover,.btn.primary:focus-visible{background:#a8342a;box-shadow:inset 3px 0 0 var(--gold2),0 0 32px rgba(255,150,70,.35)}
+.btn small{font-size:12px;letter-spacing:.08em;opacity:.75}
+.meta{margin-top:16px;font-size:12px;letter-spacing:.24em;color:var(--dim)}
+.hint{position:absolute;z-index:5;left:50%;bottom:26px;transform:translateX(-50%);font-size:12px;letter-spacing:.3em;color:rgba(207,197,173,.6);white-space:nowrap;transition:opacity 1s}
+.hint.gone{opacity:0}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 1s,transform 1s cubic-bezier(.2,.7,.2,1)}
+.on .reveal,.reveal.in{opacity:1;transform:none}
+.on .htxt .reveal:nth-child(2){transition-delay:.15s}.on .htxt .reveal:nth-child(3){transition-delay:.3s}
+.on .htxt .reveal:nth-child(4){transition-delay:.5s}.on .htxt .reveal:nth-child(5){transition-delay:.7s}.on .htxt .reveal:nth-child(6){transition-delay:.8s}
+
+/* ---------- sections ---------- */
+section{position:relative;padding:clamp(72px,10vw,128px) clamp(16px,5vw,48px) 0}
+.wrap{max-width:1080px;margin:0 auto}
+.kicker{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.42em;color:var(--gold)}
+.kicker::after{content:"";flex:0 0 56px;height:1px;background:var(--gold);opacity:.5}
+h2{margin:16px 0 0;font-family:var(--serif);font-weight:900;font-size:clamp(28px,3.8vw,44px);line-height:1.35;letter-spacing:.06em;color:var(--paper)}
+.lead{max-width:680px;margin-top:22px;font-family:var(--serif);font-size:16px;line-height:2.1;color:#d6cdb6}
+.lead p{margin:0 0 1.1em}
+.lead em{font-style:normal;color:var(--gold2)}
+.redact{display:inline-block;background:#020203;color:transparent;border-radius:1px;letter-spacing:0;user-select:none;box-shadow:0 0 0 1px rgba(236,226,200,.1),0 0 6px rgba(0,0,0,.8)}
+
+.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;margin-top:48px;background:var(--line);border:1px solid var(--line)}
+.cast div{background:var(--ink);padding:20px 18px 22px}
+.cast b{display:block;font-family:var(--serif);font-weight:900;font-size:21px;letter-spacing:.12em;color:var(--paper)}
+.cast span{display:block;margin-top:6px;font-size:13px;line-height:1.7;color:var(--dim)}
+.cast .you b{color:var(--gold2)}
+.cast .ghost b{color:#6f6a5d}
+
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:44px}
+.step{position:relative;padding:26px 22px 26px;background:linear-gradient(180deg,var(--ink2),var(--ink));border-top:2px solid var(--cinnabar)}
+.step .n{font-family:var(--serif);font-weight:900;font-size:40px;line-height:1;color:var(--gold);opacity:.9}
+.step h3{margin:16px 0 8px;font-family:var(--serif);font-weight:900;font-size:20px;letter-spacing:.1em;color:var(--paper)}
+.step p{margin:0;font-size:14px;line-height:1.85;color:#b8af99}
+.note{margin-top:22px;padding:16px 20px;border-left:2px solid var(--gold);background:rgba(201,164,92,.06);font-size:14px;color:#cfc5ad}
+.note b{color:var(--gold2);font-weight:500}
+
+.film{margin-top:40px;position:relative;background:#000;border:1px solid var(--line)}
+.film video{width:100%;aspect-ratio:16/9;background:#000 url(/qinggong/promo-poster.jpg) center/cover}
+.film figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:12px 16px;font-size:12px;letter-spacing:.2em;color:var(--dim);background:var(--ink)}
+
+.dl{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:0;margin-top:40px;border:1px solid var(--line);background:var(--ink2)}
+.dl .info{padding:34px clamp(20px,4vw,40px) 36px}
+.dl h3{margin:0;font-family:var(--serif);font-weight:900;font-size:clamp(24px,2.8vw,32px);letter-spacing:.1em}
+.dl h3 small{margin-left:12px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.16em;color:var(--gold);vertical-align:middle;border:1px solid rgba(201,164,92,.5);padding:2px 8px}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:8px 22px;margin:22px 0 0;font-size:14px}
+.specs dt{color:var(--dim);letter-spacing:.12em}
+.specs dd{margin:0;color:var(--paper)}
+.dl .cta{margin-top:28px}
+.sha{margin-top:22px;font-size:12px;color:var(--dim);letter-spacing:.06em;word-break:break-all}
+.sha code{font-family:var(--mono);color:#a59d88}
+.sha button{margin-left:8px;font:inherit;font-size:11px;letter-spacing:.14em;color:var(--gold);background:none;border:1px solid rgba(201,164,92,.4);padding:1px 8px;cursor:pointer}
+.sha button:hover{color:var(--gold2);border-color:var(--gold2)}
+.warn{margin-top:22px;padding:14px 18px;background:rgba(142,42,34,.14);border-left:2px solid var(--cinnabar);font-size:14px;line-height:1.85;color:#d8cdb4}
+.warn b{color:var(--paper);font-weight:500}
+/* the red palace wall with an arched gate, echoing the title screen */
+.gate{position:relative;background:var(--wall);overflow:hidden;min-height:340px}
+.gate::before{content:"";position:absolute;left:0;right:0;top:0;height:42px;background:#1c1d22;border-bottom:2px solid #6b4a2a}
+.gate::after{content:"";position:absolute;left:50%;bottom:0;width:120px;height:58%;transform:translateX(-50%);background:var(--ink);border-radius:60px 60px 0 0}
+.gate i{position:absolute;z-index:1;left:50%;bottom:22%;width:9px;height:9px;margin-left:-4px;border-radius:50%;background:#f3d9a0;box-shadow:0 0 14px 4px rgba(255,190,100,.55),0 0 40px 12px rgba(255,150,60,.25);animation:flick 4s infinite}
+@keyframes flick{0%,100%{opacity:1}43%{opacity:.85}45%{opacity:.45}47%{opacity:.9}72%{opacity:.75}}
+
+.keys{width:100%;margin-top:34px;border-collapse:collapse;font-size:14px}
+.keys caption{text-align:left;font-family:var(--serif);font-weight:900;font-size:18px;letter-spacing:.14em;color:var(--paper);padding-bottom:12px}
+.keys td{padding:10px 0;border-top:1px solid var(--line);color:#c6bca5;vertical-align:top}
+.keys td:first-child{width:46%;white-space:nowrap;padding-right:16px}
+kbd{display:inline-block;min-width:26px;padding:2px 7px;margin:0 3px 0 0;font:500 12px/1.5 var(--mono);text-align:center;color:var(--paper);background:var(--ink3);border:1px solid #2b2e37;border-bottom-width:2px;border-radius:3px}
+
+.log{list-style:none;margin:40px 0 0;padding:0;border-left:1px solid var(--line)}
+.log li{position:relative;padding:0 0 26px 28px}
+.log li::before{content:"";position:absolute;left:-5px;top:9px;width:9px;height:9px;background:var(--ink);border:1px solid var(--gold);transform:rotate(45deg)}
+.log li.now::before{background:var(--cinnabar);border-color:var(--gold2);box-shadow:0 0 12px rgba(255,150,70,.5)}
+.log time{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--gold)}
+.log p{margin:4px 0 0;color:#c9bfa8}
+
+footer{margin-top:clamp(80px,10vw,128px);padding:34px clamp(16px,5vw,48px) 48px;border-top:1px solid var(--line);font-size:13px;color:var(--dim)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 24px}
+footer a{color:var(--paper2);text-decoration:none;margin-left:18px}
+footer a:first-child{margin-left:0}
+footer a:hover{color:var(--gold2)}
+
+@media (max-width:900px){
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dl{grid-template-columns:1fr}.gate{display:none}
+}
+@media (max-width:720px){
+  .top nav a:not(.navdl){display:none}
+  .stage{left:0;-webkit-mask-image:none;mask-image:none}
+  .bg{background-position:30% 50%}
+  .shade{background:linear-gradient(180deg,rgba(10,11,15,.6),transparent 20%,rgba(10,11,15,.55) 46%,var(--ink) 80%)}
+  .htxt{top:auto;bottom:64px;transform:none;right:16px}
+  .hook{margin-top:18px;line-height:1.95}
+  .cta{margin-top:24px}
+  .hint{display:none}
+}
+@media (max-width:520px){
+  .steps{grid-template-columns:1fr}
+  .keys td:first-child{width:auto;white-space:normal}
+  .btn{padding:12px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.bg{transform:none;transition:none}.reveal{opacity:1;transform:none;transition:none}.gate i{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="top">
+    <a class="home" href="/">◂ NAZAJTANG.WORK</a>
+    <nav aria-label="页面导航">
+      <a href="#story">故事</a><a href="#play">玩法</a><a href="#trailer">宣传片</a><a class="navdl" href="#download">下载</a>
+    </nav>
+  </div>
+  <div class="stage" id="stage" aria-hidden="true">
+    <div class="bg"></div>
+    <canvas id="snow"></canvas>
+    <div class="dark"></div>
+    <div class="glow"></div>
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="htxt">
+    <div class="eyebrow reveal">QING PALACE · NIGHT WATCH</div>
+    <h1 class="reveal">清宫诡事录</h1>
+    <div class="subt reveal">龙袍前夜 · 灰盒 Demo</div>
+    <p class="hook reveal">顺治八年二月十四，子夜。<br>你是慈宁宫的守夜人老七。<br>天亮之前，守夜簿上三更那一行，由你来写。</p>
+    <div class="cta reveal">
+      <a class="btn primary" href="#download">下载 Demo <small>Windows · 45 MB</small></a>
+      <a class="btn" href="#trailer">看宣传片</a>
+    </div>
+    <div class="meta reveal">免安装 · 解压即玩 · 四个结局</div>
+  </div>
+  <div class="hint" id="hint" aria-hidden="true">移动鼠标 · 提灯照路</div>
+</header>
+
+<main>
+  <section id="story">
+    <div class="wrap">
+      <div class="kicker reveal">STORY · 故事</div>
+      <h2 class="reveal">前后不到两个月，<br>他从皇帝变成了罪人。</h2>
+      <div class="lead reveal">
+        <p>2026 年深夜，故宫档案整理员林砚对完最后一册《清世祖实录》。书页之间滑出一张烧焦的薄纸——一页顺治八年的<em>守夜簿</em>。三更那一行被涂黑，只剩几个字：<span class="redact">█████</span>守夜人▢▢，知情，已处置。</p>
+        <p>手指碰到那两个方框，墨迹漫开。再睁眼，林砚成了慈宁宫的守夜人老七。</p>
+        <p>那是顺治八年二月十四的夜里。两个月前去世的皇父摄政王多尔衮，刚被追尊为皇帝；天亮以后，他就会被告发<em>"私制帝服"</em>。</p>
+      </div>
+      <div class="cast reveal" aria-label="人物">
+        <div><b>林砚</b><span>2026 年的故宫档案整理员</span></div>
+        <div class="you"><b>老七</b><span>慈宁宫守夜人，你附身的人</span></div>
+        <div><b>何公公</b><span>值房管事太监，老七的上司</span></div>
+        <div><b>哑宫女</b><span>在工地廊下烧纸，不能说话</span></div>
+        <div><b>赵笔帖式</b><span>档房文书，连夜誊写告发状</span></div>
+        <div class="ghost"><b>多尔衮</b><span>只以影子出现，不说话</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="play">
+    <div class="wrap">
+      <div class="kicker reveal">GAMEPLAY · 玩法</div>
+      <h2 class="reveal">守夜的人，只要眼睛，不要嘴。</h2>
+      <div class="steps">
+        <div class="step reveal"><div class="n">一</div><h3>提灯夜巡</h3><p>灯照不到的地方什么也看不清。没有任务标记，也没有人告诉你东西藏在哪——多看，多走。</p></div>
+        <div class="step reveal"><div class="n">二</div><h3>调查 · 记簿</h3><p>值房、工地、偏殿、档房。同一样东西可以看不止一次，看到的都记进守夜簿。</p></div>
+        <div class="step reveal"><div class="n">三</div><h3>史书对照</h3><p>把线索放到《实录》的字句上，找出哪里对不上。心神越低，你记得的史书文字越不可靠。</p></div>
+        <div class="step reveal"><div class="n">四</div><h3>下判断</h3><p>四更回到值房，在守夜簿第三行写下你的判断。共四个结局，有一个藏得比较深。</p></div>
+      </div>
+      <p class="note reveal"><b>史实与虚构</b>　每个结局之后都有一页说明，把有出处的史实和故事里的超自然情节分开讲清楚。</p>
+    </div>
+  </section>
+
+  <section id="trailer">
+    <div class="wrap">
+      <div class="kicker reveal">TRAILER · 宣传片</div>
+      <h2 class="reveal">夜雪慈宁宫</h2>
+      <figure class="film reveal">
+        <video controls playsinline preload="none" poster="/qinggong/promo-poster.jpg" aria-label="《清宫诡事录》宣传片《夜雪慈宁宫》">
+          <source src="/qinggong/promo.mp4" type="video/mp4">
+        </video>
+        <figcaption><span>宣传片《夜雪慈宁宫》</span><span>12 秒 · 无声</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <div class="kicker reveal">DOWNLOAD · 下载</div>
+      <h2 class="reveal">今夜，由你守。</h2>
+      <div class="dl reveal">
+        <div class="info">
+          <h3>龙袍前夜<small>灰盒 Demo v0.1</small></h3>
+          <dl class="specs">
+            <dt>平台</dt><dd>Windows 10 / 11（64 位）</dd>
+            <dt>大小</dt><dd>45.2 MB（zip）</dd>
+            <dt>构建</dt><dd>2026-11-25</dd>
+            <dt>安装</dt><dd>解压后双击「龙袍前夜.exe」，不用安装</dd>
+          </dl>
+          <div class="cta">
+            <a class="btn primary" id="dlbtn" href="https://github.com/tanghao0903/tanghao0903.github.io/releases/download/qinggong-demo-v0.1/QingGongGuiShiLu-LongPaoQianYe-Demo-v0.1-win64.zip">下载 zip <small>45 MB</small></a>
+            <a class="btn" href="https://github.com/tanghao0903/tanghao0903.github.io/releases?q=qinggong">所有版本</a>
+          </div>
+          <div class="warn">如果 Windows 弹出<b>"Windows 已保护你的电脑"</b>：点<b>"更多信息"</b>，再点<b>"仍要运行"</b>。Demo 还没有做代码签名，所以会这样提示。</div>
+          <div class="sha">SHA-256　<code id="sha">0230713CABAC9148AD499D0B18FBAB87905D3DA3E8F72973CAE26BB6A1047A0A</code><button type="button" id="copysha">复制</button></div>
+          <table class="keys">
+            <caption>操作</caption>
+            <tr><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / 方向键</td><td>走动</td></tr>
+            <tr><td><kbd>E</kbd></td><td>调查 / 对话 / 下一句 / 确认</td></tr>
+            <tr><td><kbd>↑</kbd><kbd>↓</kbd></td><td>选选项</td></tr>
+            <tr><td><kbd>B</kbd></td><td>翻开守夜簿和史书</td></tr>
+            <tr><td><kbd>M</kbd></td><td>展开大地图</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>合上书、地图</td></tr>
+          </table>
+          <p class="note">这是开发中的灰盒版本，画面还是临时的。暂时只有 Windows 版。</p>
+        </div>
+        <div class="gate" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="devlog">
+    <div class="wrap">
+      <div class="kicker reveal">DEVLOG · 版本记录</div>
+      <h2 class="reveal">守夜簿</h2>
+      <ol class="log reveal">
+        <li class="now"><time datetime="2026-11-26">2026.11.26</time><p>感恩节，《龙袍前夜》灰盒 Demo 首次公开下载。</p></li>
+        <li><time datetime="2026-11-25">2026.11.25</time><p>灰盒 v0.1：序章 + 三幕 + 四更判断，四个结局；守夜簿、史书对照、心神。</p></li>
+        <li><time datetime="2026-11-19">2026.11.19</time><p>《慈宁宫夜巡》灰盒原型，内部试玩。</p></li>
+        <li><time datetime="2026-11-18">2026.11.18</time><p>宣传片《夜雪慈宁宫》。</p></li>
+        <li><time datetime="2026-11-17">2026.11.17</time><p>立项：Demo 一页纸设计，剧本《龙袍前夜》初稿。</p></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>本作中的超自然情节为虚构，史实部分附出处说明。　© 2026 Naza Tang</span>
+    <span><a href="/">首页</a><a href="/projects/">项目</a><a href="/thanksgiving/">感恩节特别页</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero=document.getElementById('top'),stage=document.getElementById('stage');
+  requestAnimationFrame(function(){setTimeout(function(){hero.classList.add('on')},60)});
+
+  /* reveal on scroll */
+  var rv=document.querySelectorAll('main .reveal');
+  if('IntersectionObserver' in window&&!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    rv.forEach(function(el){io.observe(el)});
+  } else rv.forEach(function(el){el.classList.add('in')});
+
+  /* the lantern: darkness over the key art, lit around the cursor.
+     At rest the light sits on the watchman's lantern in the picture. */
+  var IMG_W=1920,IMG_H=1080,LAMP_X=627,LAMP_Y=708;
+  var box,rest={x:0,y:0},lx=0,ly=0,tx=null,ty=null,lastMove=0,hint=document.getElementById('hint');
+  function measure(){
+    box=stage.getBoundingClientRect();
+    var mobile=innerWidth<=720,px=mobile?.3:.22;
+    var s=Math.max(box.width/IMG_W,box.height/IMG_H);
+    rest.x=(box.width-IMG_W*s)*px+LAMP_X*s;rest.y=(box.height-IMG_H*s)*.5+LAMP_Y*s;
+    if(!lx){lx=rest.x;ly=rest.y}
+  }
+  measure();addEventListener('resize',measure);
+  hero.addEventListener('pointermove',function(e){
+    tx=e.clientX-box.left;ty=e.clientY-box.top;lastMove=performance.now();
+    if(hint&&!hint.classList.contains('gone'))hint.classList.add('gone');
+  },{passive:true});
+  hero.addEventListener('pointerleave',function(){tx=ty=null});
+  var visible=true;
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting}).observe(hero);
+  function setLamp(t){
+    var base=Math.max(180,Math.min(box.width,box.height)*.34);
+    var r=base*(reduce?1:(1+.035*Math.sin(t*.009)+.02*Math.sin(t*.023)));
+    stage.style.setProperty('--lx',lx.toFixed(1)+'px');stage.style.setProperty('--ly',ly.toFixed(1)+'px');stage.style.setProperty('--lr',r.toFixed(1)+'px');
+  }
+  setLamp(0);
+
+  /* snow */
+  var cv=document.getElementById('snow'),ctx=cv.getContext('2d'),W,H,DPR=Math.min(devicePixelRatio||1,2),flakes=[];
+  function size(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
+  size();addEventListener('resize',size);
+  var N=innerWidth<720?70:150;
+  for(var i=0;i<N;i++)flakes.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),ph:Math.random()*6.28});
+
+  function frame(t){
+    if(visible){
+      var idle=tx===null||t-lastMove>3500;
+      var gx=idle?rest.x:tx,gy=idle?rest.y:ty;
+      lx+=(gx-lx)*(idle?.03:.14);ly+=(gy-ly)*(idle?.03:.14);
+      setLamp(t);
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<flakes.length;i++){
+        var f=flakes[i],sp=.25+f.z*.9;
+        f.y+=sp;f.ph+=.01+f.z*.01;f.x+=Math.sin(f.ph)*.35*sp+.12;
+        if(f.y>H+4){f.y=-4;f.x=Math.random()*W}
+        if(f.x>W+4)f.x=-4;
+        var dx=f.x-lx,dy=f.y-ly,lit=Math.max(0,1-Math.sqrt(dx*dx+dy*dy)/320);
+        ctx.globalAlpha=.25+f.z*.45+lit*.3;
+        ctx.fillStyle=lit>.05?'rgb(255,'+(236-lit*40|0)+','+(214-lit*90|0)+')':'#e7ecf5';
+        ctx.beginPath();ctx.arc(f.x,f.y,.6+f.z*1.8,0,6.283);ctx.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  if(!reduce)requestAnimationFrame(frame);
+  else{ctx.fillStyle='#e7ecf5';flakes.forEach(function(f){ctx.globalAlpha=.3+f.z*.4;ctx.beginPath();ctx.arc(f.x,f.y,.6+f.z*1.8,0,6.283);ctx.fill()})}
+
+  /* copy the checksum */
+  var cb=document.getElementById('copysha');
+  cb.addEventListener('click',function(){
+    var v=document.getElementById('sha').textContent;
+    try{navigator.clipboard.writeText(v).then(function(){cb.textContent='已复制'},function(){cb.textContent='复制失败'})}catch(e){cb.textContent='复制失败'}
+    setTimeout(function(){cb.textContent='复制'},1800);
+  });
+})();
+</script>
+</body>
+</html>

@@ -63,6 +63,7 @@
   var REN=[
   'precision highp float;',
   'uniform vec2 R;uniform float T;uniform sampler2D S;uniform vec2 spx;uniform float useSim;',
+  'uniform vec3 RA;uniform vec3 RB;uniform vec3 GA;uniform vec3 GB;uniform vec3 TS;uniform vec3 TH;',
   'float SS(float a,float b,float x){return a<b?smoothstep(a,b,x):1.-smoothstep(b,a,x);}',
   'float h1(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
   'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
@@ -94,8 +95,8 @@
   ' float s2=SS(.13,.05,abs(az+2.1))*SS(.58,.66,e)*SS(.97,.88,e);',
   ' c+=vec3(1.)*s1*mix(.6,1.5,SS(.62,.97,e))+vec3(1.)*s2*mix(.5,1.3,SS(.97,.6,e));',
   /* neon rim lights reflected low in the room */
-  ' c+=vec3(1.,.15,.8)*SS(.8,0.,abs(az-2.5))*SS(hz-.35,hz-.05,e)*SS(hz+.01,hz-.03,e)*1.6;',
-  ' c+=vec3(0.,.9,1.)*SS(.8,0.,abs(az+.6))*SS(hz-.35,hz-.05,e)*SS(hz+.01,hz-.03,e)*1.5;',
+  ' c+=RA*SS(.8,0.,abs(az-2.5))*SS(hz-.35,hz-.05,e)*SS(hz+.01,hz-.03,e)*1.6;',
+  ' c+=RB*SS(.8,0.,abs(az+.6))*SS(hz-.35,hz-.05,e)*SS(hz+.01,hz-.03,e)*1.5;',
   ' return c;}',
   'void main(){',
   ' vec2 sp=gl_FragCoord.xy/R;',
@@ -117,7 +118,7 @@
   ' float fr=.9+.1*pow(1.-max(dot(-V,N),0.),5.);',
   ' col*=fr;',
   /* chrome tint: cool shadows, warm-white highlights */
-  ' col=mix(col*vec3(.86,.9,1.),col,smoothstep(.2,1.,col.g));',
+  ' col=mix(col*TS,col*TH,smoothstep(.2,1.,col.g));',
   /* sharp key-light glint */
   ' vec3 L=normalize(vec3(-.35,.55,.75));',
   ' col+=pow(max(dot(Rf,L),0.),180.)*2.2;',
@@ -128,7 +129,7 @@
   '  vec2 gg=vec2((sp.x-.5)*z*6.,z*1.4+T*.5);',
   '  vec2 gf=abs(fract(gg)-.5);',
   '  float ln=smoothstep(.47,.5,max(gf.x,gf.y));',
-  '  col+=mix(vec3(1.,.17,.84),vec3(0.,.94,1.),sp.y/hz)*ln*.28*smoothstep(0.,.08,hz-sp.y);',
+  '  col+=mix(GA,GB,sp.y/hz)*ln*.28*smoothstep(0.,.08,hz-sp.y);',
   ' }',
   ' vec2 vg=sp-.5;col*=1.-dot(vg,vg)*.8;',
   /* filmic-ish tone curve keeps the blacks deep and highlights crisp */
@@ -144,6 +145,14 @@
   var pRen=prog(REN),pSim=useSim?prog(SIM):null;
   function U(p,n){return gl.getUniformLocation(p,n)}
   var rR=U(pRen,'R'),rT=U(pRen,'T'),rS=U(pRen,'S'),rSpx=U(pRen,'spx'),rUse=U(pRen,'useSim');
+  /* colour themes: <body data-metal="harvest"> swaps the neon rims for warm gold (Thanksgiving page) */
+  var THEMES={
+    neon:{RA:[1,.15,.8],RB:[0,.9,1],GA:[1,.17,.84],GB:[0,.94,1],TS:[.86,.9,1],TH:[1,1,1]},
+    harvest:{RA:[1,.32,.08],RB:[1,.72,.22],GA:[.95,.2,.12],GB:[1,.7,.2],TS:[.6,.32,.16],TH:[1,.76,.4]}
+  };
+  var TM=THEMES[document.body.getAttribute('data-metal')]||THEMES.neon;
+  gl.useProgram(pRen);
+  ['RA','RB','GA','GB','TS','TH'].forEach(function(k){gl.uniform3fv(U(pRen,k),TM[k])});
   var sS,sPx,sA,sB,sF,sRad,sAsp;
   if(useSim){sS=U(pSim,'S');sPx=U(pSim,'px');sA=U(pSim,'A');sB=U(pSim,'B');sF=U(pSim,'F');sRad=U(pSim,'RAD');sAsp=U(pSim,'asp');}
 
