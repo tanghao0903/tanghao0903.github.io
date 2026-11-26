@@ -167,7 +167,7 @@ footer a{color:var(--cyan)}
 
   <footer>
     <span>© 2026 NAZA TANG · HAPPY THANKSGIVING</span>
-    <span><a href="/">HOME ▸</a> &nbsp; <a href="/projects/">PROJECTS ▸</a></span>
+    <span><a href="/" id="homelink">HOME ▸ &nbsp; </a><a href="/projects/">PROJECTS ▸</a> &nbsp; <a href="/qinggong/">GAME ▸</a></span>
   </footer>
 </main>
 
@@ -176,6 +176,10 @@ footer a{color:var(--cyan)}
 <script>
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nov 26–27 this page *is* the home page ("/" redirects here), so a HOME link would only reload it */
+  var d=new Date(),k=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  if(k>=20261126&&k<=20261127)document.getElementById('homelink').hidden=true;
 
   /* typed terminal lines */
   var term=document.getElementById('term'),cur=term.querySelector('.cursor');

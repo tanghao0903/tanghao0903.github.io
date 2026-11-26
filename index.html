@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thanksgiving 2026: on Nov 26–27 (visitor's local date) the home page opens on /thanksgiving/.
+   From Nov 28 this does nothing and the normal home page is back. */
+(function(){var d=new Date(),k=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+  if(k>=20261126&&k<=20261127)location.replace('/thanksgiving/');})();
+</script>
 <title>Naza Tang</title>
 <meta name="description" content="欢迎访问 Naza Tang 的个人网站">
 <meta name="theme-color" content="#07060b">
@@ -34,11 +40,6 @@
 .ready .enter{opacity:1;transition:opacity .6s 2.4s,background .2s,box-shadow .2s,transform .2s}
 .enter:hover{background:var(--pink);box-shadow:0 0 34px rgba(255,43,214,.8);transform:translateY(-2px)}
 .hello{will-change:opacity}
-.fest{position:fixed;z-index:6;top:46px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-family:var(--cn);font-size:13px;letter-spacing:.2em;color:#ffb347;text-decoration:none;
-  padding:8px 16px;border:1px solid rgba(255,179,71,.55);background:rgba(20,10,4,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 18px rgba(255,140,50,.25);
-  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:background .2s,color .2s}
-.fest:hover,.fest:focus-visible{background:#ffb347;color:#000;outline:none}
-.fest[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.ready .hello{animation:none}.glitch::before,.glitch::after{animation:none}}
 </style>
 </head>
@@ -52,8 +53,6 @@
   <span class="t t3" id="coord">X 0000 · Y 0000</span>
   <span class="t t4">NEURAL LINK · ONLINE</span>
 </div>
-
-<a class="fest" id="fest" href="/thanksgiving/" hidden>✦ 感恩节特别页 · 还有新游戏 ▸</a>
 
 <section class="hero">
   <div class="hello">
@@ -82,9 +81,6 @@
     else if(li+1<lines.length){li++;ci=0;setTimeout(type,700);}
   }
   setTimeout(type,reduce?0:900);
-  /* seasonal link: shows through November and the first week of December */
-  var d=new Date(),m=d.getMonth();
-  if(m===10||(m===11&&d.getDate()<=7))document.getElementById('fest').hidden=false;
 })();
 </script>
 </body>
