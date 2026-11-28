@@ -34,6 +34,24 @@
 .ready .enter{opacity:1;transition:opacity .6s 2.4s,background .2s,box-shadow .2s,transform .2s}
 .enter:hover{background:var(--pink);box-shadow:0 0 34px rgba(255,43,214,.8);transform:translateY(-2px)}
 .hello{will-change:opacity}
+/* featured project: 清宫诡事录 */
+.feat{pointer-events:auto;position:relative;display:flex;align-items:center;gap:14px;width:fit-content;max-width:100%;margin:26px auto 0;padding:10px 18px 10px 10px;text-align:left;text-decoration:none;color:var(--fg);
+  background:linear-gradient(135deg,rgba(7,6,11,.84),rgba(36,10,14,.74));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));opacity:0;transition:transform .2s,background .2s}
+.feat::before{content:"";position:absolute;inset:0;padding:1px;pointer-events:none;background:linear-gradient(135deg,var(--yellow),transparent 40%,transparent 62%,var(--pink));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.ready .feat{opacity:1;transition:opacity .6s 2.8s,transform .2s,background .2s}
+.feat:hover,.feat:focus-visible{transform:translateY(-2px);background:linear-gradient(135deg,rgba(20,10,8,.9),rgba(70,18,22,.82));outline:none}
+.feat .thumb{flex:0 0 auto;width:96px;height:54px;background:#05070d url(/qinggong/og.jpg) 30% 60%/cover;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.feat .ft{display:flex;flex-direction:column;gap:2px;min-width:0}
+.feat small{font-size:11px;letter-spacing:.22em;color:var(--yellow)}
+.feat b{font-family:var(--cn);font-weight:900;font-size:16px;letter-spacing:.08em;color:#fff}
+.feat em{font-style:normal;font-family:var(--cn);font-size:12px;letter-spacing:.04em;color:#a9b4c8}
+.feat .go{margin-left:6px;font-size:14px;color:var(--pink);transition:transform .2s}
+.feat:hover .go,.feat:focus-visible .go{transform:translateX(3px)}
+/* phones: keep "NAZA TANG" on one line (disturb.js splits it into letters, which could otherwise wrap) */
+@media (max-width:600px){.glitch{font-size:10.5vw;white-space:nowrap}}
+@media (max-width:420px){.feat{gap:12px;padding-right:14px}.feat .thumb{width:72px;height:48px}.feat b{font-size:15px}.feat em{font-size:11px}}
 @media (prefers-reduced-motion:reduce){.ready .hello{animation:none}.glitch::before,.glitch::after{animation:none}}
 </style>
 </head>
@@ -56,6 +74,11 @@
     <div class="sub">的个人网站</div>
     <div class="term" id="term"><span class="cursor"></span></div>
     <a class="enter" href="/projects/">ENTER ▸</a>
+    <a class="feat" href="/qinggong/">
+      <i class="thumb" aria-hidden="true"></i>
+      <span class="ft"><small>// 首推 · NEW DEMO</small><b>清宫诡事录 · 龙袍前夜</b><em>灰盒 Demo 开放下载 · Windows / Mac</em></span>
+      <span class="go" aria-hidden="true">▸</span>
+    </a>
   </div>
 </section>
 
